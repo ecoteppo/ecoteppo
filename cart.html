@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Teppo - Shopping Cart</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { width: 80%; margin: 50px auto; }
+        .product { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #ccc; }
+        .product img { width: 100px; height: auto; }
+        .cart { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Eco Teppo Products</h2>
+        <div class="product">
+            <img src="eco_teppo_bag.jpg" alt="Eco Teppo Bag">
+            <p>Eco Teppo Handwoven Bag - $25</p>
+            <button onclick="addToCart('Eco Teppo Handwoven Bag', 25)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="eco_teppo_wallet.jpg" alt="Eco Teppo Wallet">
+            <p>Eco Teppo Handwoven Wallet - $15</p>
+            <button onclick="addToCart('Eco Teppo Handwoven Wallet', 15)">Add to Cart</button>
+        </div>
+        <h3>Shopping Cart</h3>
+        <ul id="cart"></ul>
+        <h3>Total: $<span id="total">0</span></h3>
+        <button onclick="checkout()">Checkout</button>
+    </div>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById("cart");
+            cartList.innerHTML = "";
+            cart.forEach(product => {
+                const li = document.createElement("li");
+                li.textContent = `${product.item} - $${product.price}`;
+                cartList.appendChild(li);
+            });
+            document.getElementById("total").textContent = total;
+        }
+
+        function checkout() {
+            alert("Proceeding to checkout. Total: $" + total);
+            // Here, you can add further checkout logic (e.g., payment integration)
+        }
+    </script>
+</body>
+</html>
